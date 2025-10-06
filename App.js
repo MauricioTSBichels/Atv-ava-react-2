@@ -41,19 +41,26 @@ export default function App() {
       <Text style={styles.header}>Filmes da Marvel</Text>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        {games.map((item, index) => (
-          <View style={styles.card} key={index}>
-            <Image source={{ uri: item.linkPoster }} style={styles.image} />
+        {games.map((item, index) => {
+          // Formata o valor da bilheteria com separador de milhar
+          const valorFormatado = Number(item.valorArrecadacao).toLocaleString(
+            "pt-BR"
+          );
 
-            <Text style={styles.title}>{item.titulo}</Text>
-            <Text style={styles.text}>Franquia: {item.franquia}</Text>
-            <Text style={styles.text}>Ano: {item.anoLancamento}</Text>
-            <Text style={styles.boxOffice}>
-              Bilheteria:{" "}
-              <Text style={styles.boxOfficeValue}>{item.valorArrecadacao}</Text>
-            </Text>
-          </View>
-        ))}
+          return (
+            <View style={styles.card} key={index}>
+              <Image source={{ uri: item.linkPoster }} style={styles.image} />
+
+              <Text style={styles.title}>{item.titulo}</Text>
+              <Text style={styles.text}>Franquia: {item.franquia}</Text>
+              <Text style={styles.text}>Ano: {item.anoLancamento}</Text>
+              <Text style={styles.boxOffice}>
+                Bilheteria:{" "}
+                <Text style={styles.boxOfficeValue}>R$ {valorFormatado}</Text>
+              </Text>
+            </View>
+          );
+        })}
       </ScrollView>
     </View>
   );
